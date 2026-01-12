@@ -1,0 +1,42 @@
+# FastAPI & Server
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+pydantic>=2.5.3
+python-dotenv>=1.0.0
+
+# Frontend
+streamlit>=1.28.0
+
+# CrewAI (Core only - no crewai-tools)
+crewai>=0.70.0
+
+# Web Scraping & Search
+requests>=2.31.0
+beautifulsoup4>=4.12.3
+lxml>=5.1.0
+html5lib>=1.1
+duckduckgo-search>=4.1.1
+
+# PDF Processing (Optional)
+PyMuPDF>=1.23.8
+pdfplumber>=0.10.3
+
+# Vector Database & Embeddings
+faiss-cpu>=1.7.4
+sentence-transformers>=2.3.1
+numpy>=1.24.0
+transformers>=4.30.0
+
+# NLP & Text Processing
+bnlp-toolkit>=3.6.0
+
+# Utilities
+python-dateutil>=2.8.2
+pytz>=2025.2
+
+# Logging & Monitoring
+loguru>=0.7.2
+tokenizers==0.19.1
+
+langchain>=0.3.12
