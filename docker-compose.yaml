@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: university-ai-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - LM_STUDIO_BASE_URL=http://host.docker.internal:1234/v1
+      - LM_STUDIO_MODEL=lmstudio-community/liquid/lfm2-1.2b
+      - NOTICE_URL=https://your-university.edu/notices
+      - FACULTY_URL=https://your-university.edu/faculty
+      - LIBRARY_URL=https://your-university.edu/library
+      - FAISS_INDEX_PATH=/app/data/faiss_index
+    volumes:
+      - ./data:/app/data
+      - ./backend:/app
+    restart: unless-stopped
+    networks:
+      - university-ai-network
+
+  frontend:
+    image: python:3.10-slim
+    container_name: university-ai-frontend
+    working_dir: /app
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./frontend:/app
+    command: >
+      sh -c "pip install -r requirements.txt && 
+             streamlit run streamlit_app.py --server.port=8501 --server.address=0.0.0.0"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - university-ai-network
+
+networks:
+  university-ai-network:
+    driver: bridge
+
+volumes:
+  faiss_data:
